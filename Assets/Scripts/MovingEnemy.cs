@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class MovingEnemy : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D enemy;
-    [SerializeField] float speed = 5f;
 
-    void Update() => enemy?.AddForce(Vector2.right * speed * Time.deltaTime);
+    Vector2 direction = Vector2.right;
+    [SerializeField] float speed = 120;
+
+    void Update() => transform.Translate(direction * speed * Time.deltaTime);
 
     void OnTriggerExit2D(Collider2D other) {
-        if(other.gameObject.CompareTag("Ground")){
-            enemy?.AddForce(Vector2.left * speed * Time.deltaTime);
+        if(other.gameObject.CompareTag("Ground") && transform.position.x > 0){
+            direction = Vector2.left;
+            Debug.Log(direction);
         }
-        else if (other.gameObject.CompareTag("Ground") && transform.position.x < 0){
-            enemy?.AddForce(Vector2.right * speed * Time.deltaTime);
+        if(other.gameObject.CompareTag("Ground") && transform.position.x < 0){
+            direction = Vector2.right;
+            Debug.Log(direction);
         }
     }
 }
