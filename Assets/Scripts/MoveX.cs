@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MoveX : MonoBehaviour
 {
-    [SerializeField] float speed = 40.0f;
-    void Update()
-    {
-            transform.Translate(Vector2.right * Time.deltaTime * speed);
-    }
+    [SerializeField] float speed = 100f;
+    [SerializeField] Rigidbody2D body;
+
+
+    public void AddVelocity(Vector2 force) => body?.AddForce(force * speed, ForceMode2D.Impulse);
 }

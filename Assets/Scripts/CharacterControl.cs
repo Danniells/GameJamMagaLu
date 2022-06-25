@@ -46,7 +46,7 @@ public class CharacterControl : MonoBehaviour, IPlayerController
 
         MoveCharacter(); // Actually perform the axis movement
 
-        FireProjectile(); //Fire the projectile
+        if(UnityEngine.Input.GetButtonDown("Fire1")) FireProjectile(); //Fire the projectile
     }
 
 
@@ -250,7 +250,6 @@ public class CharacterControl : MonoBehaviour, IPlayerController
             // _currentVerticalSpeed = 0;
             _endedJumpEarly = true;
         }
-
         if (_colUp) {
             if (_currentVerticalSpeed > 0) _currentVerticalSpeed = 0;
         }
@@ -301,13 +300,24 @@ public class CharacterControl : MonoBehaviour, IPlayerController
         }
     }
 
-    [Header("PROJECTILE")]  [SerializeField] GameObject projectile;
-    [SerializeField] GameObject projectile2;
+    [Header("PROJECTILE")]  
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private List<Transform> aimPoint;
+    [SerializeField] private float speed = 50f;
+
     void FireProjectile(){
-        if(UnityEngine.Input.GetKeyDown(KeyCode.E))
-            Instantiate(projectile, transform.position, Quaternion.identity);
-        else if(UnityEngine.Input.GetKeyDown(KeyCode.Q))
-            Instantiate(projectile2, transform.position, Quaternion.identity);
+        if(Input.X < 0)
+        {
+            var obj = Instantiate(projectile, aimPoint[0].position, Quaternion.identity);
+            var body = obj.GetComponent<MoveX>();
+            body.AddVelocity(-transform.right);
+        }
+        else
+        {
+            var obj = Instantiate(projectile, aimPoint[1].position, Quaternion.identity);
+            var body = obj.GetComponent<MoveX>();
+            body.AddVelocity(transform.right);
+        }
     }
 
     #endregion

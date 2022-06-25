@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2474144814050444194}
   - component: {fileID: 3601390324788080853}
-  - component: {fileID: 5994756994419583342}
   - component: {fileID: 758362354677330318}
+  - component: {fileID: 8801668782539126154}
+  - component: {fileID: 5385808170728993493}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -84,19 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5994756994419583342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5354492403162583810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86056101f833f48c38c06b318400d51b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 40
 --- !u!114 &758362354677330318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,3 +97,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ded0e8cd1cc4b6889f4cb82d4c3c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8801668782539126154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5354492403162583810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86056101f833f48c38c06b318400d51b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 100
+  body: {fileID: 5385808170728993493}
+--- !u!50 &5385808170728993493
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5354492403162583810}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.1
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
