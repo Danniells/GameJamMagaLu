@@ -303,12 +303,12 @@ public class CharacterControl : MonoBehaviour, IPlayerController
     [Header("PROJECTILE")]  
     [SerializeField] private GameObject projectile;
     [SerializeField] private List<Transform> aimPoint;
-    [SerializeField] private float speed = 50f;
 
     void FireProjectile(){
         if(Input.X < 0)
         {
             var obj = Instantiate(projectile, aimPoint[0].position, Quaternion.identity);
+            obj.transform.localRotation = new Quaternion(0f, -180f, -90f, 0f);
             var body = obj.GetComponent<MoveX>();
             body.AddVelocity(-transform.right);
         }

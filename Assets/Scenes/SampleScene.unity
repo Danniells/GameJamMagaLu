@@ -245,7 +245,7 @@ MonoBehaviour:
   _detectorCount: 3
   _detectionRayLength: 0.1
   _rayBuffer: 0.1
-  _acceleration: 90
+  _acceleration: 80
   _moveClamp: 13
   _deAcceleration: 60
   _apexBonus: 2
@@ -262,7 +262,6 @@ MonoBehaviour:
   aimPoint:
   - {fileID: 1535999384}
   - {fileID: 2042001532}
-  speed: 30
 --- !u!212 &575887575
 SpriteRenderer:
   m_ObjectHideFlags: 0
