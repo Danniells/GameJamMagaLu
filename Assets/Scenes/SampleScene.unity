@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 575887575}
   - component: {fileID: 575887574}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,6 +258,8 @@ MonoBehaviour:
   _jumpBuffer: 0.1
   _jumpEndEarlyGravityModifier: 3
   _freeColliderIterations: 10
+  projectile: {fileID: 5354492403162583810, guid: e422b536771da42519dee66bd925d709, type: 3}
+  projectile2: {fileID: 8384718080739184933, guid: 5c2e775d497ce41e7b88826cf48a32fd, type: 3}
 --- !u!212 &575887575
 SpriteRenderer:
   m_ObjectHideFlags: 0

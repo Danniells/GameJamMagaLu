@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637917196560000000
+      ticks: 637917200780000000
     m_Hash: 2624736591
   m_LockFileStatus:
     m_FilePath: /Users/danielbisaggio/Downloads/UnityArchive/GameJamMagaLu/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637917196650000000
+      ticks: 637917200780000000
     m_Hash: 834079187
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}

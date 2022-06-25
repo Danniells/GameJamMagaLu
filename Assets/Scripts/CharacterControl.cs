@@ -45,6 +45,8 @@ public class CharacterControl : MonoBehaviour, IPlayerController
         CalculateJump(); // Possibly overrides vertical
 
         MoveCharacter(); // Actually perform the axis movement
+
+        FireProjectile(); //Fire the projectile
     }
 
 
@@ -297,6 +299,15 @@ public class CharacterControl : MonoBehaviour, IPlayerController
 
             positionToMoveTo = posToTry;
         }
+    }
+
+    [Header("PROJECTILE")]  [SerializeField] GameObject projectile;
+    [SerializeField] GameObject projectile2;
+    void FireProjectile(){
+        if(UnityEngine.Input.GetKeyDown(KeyCode.E))
+            Instantiate(projectile, transform.position, Quaternion.identity);
+        else if(UnityEngine.Input.GetKeyDown(KeyCode.Q))
+            Instantiate(projectile2, transform.position, Quaternion.identity);
     }
 
     #endregion
