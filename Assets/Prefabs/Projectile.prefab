@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSprite: {fileID: 6651454612165755773}
-  speed: 30
+  speed: 25
   body: {fileID: 5385808170728993493}
 --- !u!50 &5385808170728993493
 Rigidbody2D:
@@ -84,7 +84,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0.019193292, y: -0.05159688}
+  m_Offset: {x: -0.02060771, y: -0.32025242}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -95,7 +95,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.406646, y: 0.6153418}
+  m_Size: {x: 4.7250524, y: 0.29295516}
   m_EdgeRadius: 0
 --- !u!251 &7397917543447750933
 PlatformEffector2D:

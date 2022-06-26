@@ -20,5 +20,5 @@ public class MoveX : MonoBehaviour
     }
 
     public void FadeProjectile() => projectileSprite.DOFade(0.0f, 0.2f).SetEase(Ease.OutQuad).OnComplete(() => DestroyProjectile());
-    private void DestroyProjectile() => Destroy(this);
+    private void DestroyProjectile() => Destroy(this.gameObject);
 }

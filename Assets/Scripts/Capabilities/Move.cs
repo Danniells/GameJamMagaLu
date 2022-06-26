@@ -1,6 +1,7 @@
 using UnityEngine;
 using Shinjingi;
 using System.Collections.Generic;
+using System.Linq;
 
 [RequireComponent(typeof(Controller))]
 public class Move : MonoBehaviour
@@ -14,9 +15,6 @@ public class Move : MonoBehaviour
     private Rigidbody2D _body;
     private Ground _ground;
     private SpriteRenderer characterSprite;
-
-    private const int kMaxShootCount = 3;
-    private int shootCount = 0;
     private float _maxSpeedChange, _acceleration;
     private bool _onGround;
 
@@ -26,6 +24,8 @@ public class Move : MonoBehaviour
         _body = GetComponent<Rigidbody2D>();
         _ground = GetComponent<Ground>();
         _controller = GetComponent<Controller>();
+        
+        shootCount = 0;
     }
 
     private void Update()
@@ -33,7 +33,7 @@ public class Move : MonoBehaviour
         _direction.x = _controller.input.RetrieveMoveInput();
         _desiredVelocity = new Vector2(_direction.x, 0f) * Mathf.Max(_maxSpeed - _ground.Friction, 0f);
         
-        if(_controller.input.RetrieveShootInput() && shootCount < kMaxShootCount) FireProjectile();
+        if(_controller.input.RetrieveShootInput()) FireProjectile();
 
         if(_direction.x < 0) transform.localScale = new Vector3(-1f, 1f, 1f);
         else transform.localScale = Vector3.one * 1f;
@@ -54,28 +54,32 @@ public class Move : MonoBehaviour
     [Header("PROJECTILE")]  
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform aimPoint;
-    private List<MoveX> projectileList = new List<MoveX>();
+    private const int kMaxShootCount = 3;
+    [SerializeField]private int shootCount;
+    public List<MoveX> projectileList = new List<MoveX>();
 
     private void FireProjectile()
     {
-        shootCount++;
         var isLeft = _direction.x < 0;
 
-        MoveX a;
-        if(shootCount > kMaxShootCount)
+        if(shootCount < kMaxShootCount)
         {
-            a = projectileList[0];
+            var obj = Instantiate(projectile, aimPoint.position, Quaternion.identity);
+
+            var body = obj.GetComponent<MoveX>();
+            projectileList.Add(body);
+            body.AddVelocity(isLeft, transform.right);
+            
+            if(isLeft) body.projectileSprite.flipX = true;
+            shootCount++;
+        }
+        else
+        {
+            var a = projectileList.First();
             a.FadeProjectile();
+            projectileList.Remove(a);
             shootCount--;
         }
-
-        var obj = Instantiate(projectile, aimPoint.position, Quaternion.identity);
-
-        var body = obj.GetComponent<MoveX>();
-        projectileList.Add(body);
-        body.AddVelocity(isLeft, transform.right);
-        
-        if(isLeft) body.projectileSprite.flipX = true;
     }
 
 }
