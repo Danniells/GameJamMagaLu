@@ -1,12 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class MoveX : MonoBehaviour
 {
-    [SerializeField] float speed = 40.0f;
-    void Update()
+    public SpriteRenderer projectileSprite;
+    [SerializeField] private float speed = 100f;
+    [SerializeField] private Rigidbody2D body;
+
+
+    public void AddVelocity(bool isLeft, Vector3 force) 
     {
-            transform.Translate(Vector2.right * Time.deltaTime * speed);
+        if(isLeft)
+        {
+            body?.AddForce(-force * speed, ForceMode2D.Impulse);
+        }
+        else body?.AddForce(force * speed, ForceMode2D.Impulse);
     }
+
+    public void FadeProjectile() => projectileSprite.DOFade(0.0f, 0.2f).SetEase(Ease.OutQuad).OnComplete(() => DestroyProjectile());
+    private void DestroyProjectile() => Destroy(this.gameObject);
 }
