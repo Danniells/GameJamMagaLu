@@ -23,11 +23,11 @@ public class MoveX : MonoBehaviour
     private void DestroyProjectile() => Destroy(this.gameObject);
 
     private void OnTriggerEnter2D(Collider2D other)
-    {   
-        if(other.transform.tag != "Sticky") 
+    {
+        body.constraints = RigidbodyConstraints2D.FreezePosition;
+        if (other.transform.tag != "Sticky") 
         {
             FadeProjectile();
-            body.constraints = RigidbodyConstraints2D.FreezePositionX;
         }
     }
 }
