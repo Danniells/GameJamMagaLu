@@ -70,6 +70,7 @@ public class Move : MonoBehaviour
     {
         if(shootCount < kMaxShootCount)
         {
+            ++shootCount;
             var obj = Instantiate(projectile, aimPoint.position, Quaternion.identity);
 
             var body = obj.GetComponent<MoveX>();
@@ -77,12 +78,11 @@ public class Move : MonoBehaviour
             body.AddVelocity(isLeft, transform.right);
             
             if(isLeft) body.projectileSprite.flipX = true;
-            shootCount++;
         }
         else
         {
             var a = projectileList.First();
-            a.FadeProjectile();
+            a?.FadeProjectile();
             projectileList.Remove(a);
             shootCount--;
         }

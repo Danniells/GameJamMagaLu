@@ -19,6 +19,11 @@ public class MoveX : MonoBehaviour
         else body?.AddForce(force * speed, ForceMode2D.Impulse);
     }
 
-    public void FadeProjectile() => projectileSprite.DOFade(0.0f, 0.2f).SetEase(Ease.OutQuad).OnComplete(() => DestroyProjectile());
+    public void FadeProjectile() => projectileSprite?.DOFade(0.0f, 0.2f).SetEase(Ease.OutQuad).OnComplete(() => DestroyProjectile());
     private void DestroyProjectile() => Destroy(this.gameObject);
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {   
+        if(other.transform.tag != "Sticky") FadeProjectile();
+    }
 }
