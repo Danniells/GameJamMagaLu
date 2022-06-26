@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 575887579}
   - component: {fileID: 575887583}
   - component: {fileID: 575887584}
+  - component: {fileID: 575887585}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -387,6 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61068da20533d5418b1b22ca9b86571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 575887585}
   _maxSpeed: 9
   _maxAcceleration: 25
   _maxAirAcceleration: 20
@@ -623,6 +625,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &575887585
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575887573}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 77f326c86f3484588b6419e63ea1cb76, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &704588720
 GameObject:
   m_ObjectHideFlags: 0
