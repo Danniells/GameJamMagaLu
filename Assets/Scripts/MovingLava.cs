@@ -6,7 +6,7 @@ public class MovingLava : MonoBehaviour
 {   
     [SerializeField] float maxSize;
     [SerializeField] float growFactor;
-    [SerializeField] public static bool isDead = false;
+    [SerializeField] bool isDead = false;
     void FixedUpdate(){
         if(!isDead && maxSize > transform.localScale.y)
         {
@@ -17,7 +17,7 @@ public class MovingLava : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.name == "Player"){
             isDead = true;
-            Debug.Log("morreu");
+            Debug.Log("Morreu pela lava");
         }
     }
     
