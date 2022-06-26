@@ -9,6 +9,7 @@ public class Move : MonoBehaviour
     [SerializeField, Range(0f, 100f)] private float _maxSpeed = 4f;
     [SerializeField, Range(0f, 100f)] private float _maxAcceleration = 35f;
     [SerializeField, Range(0f, 100f)] private float _maxAirAcceleration = 20f;
+    [SerializeField, Range(0f, 1f)] private float m_ShootSound = 0.5f;
 
     private Controller _controller;
     private Vector2 _direction, _desiredVelocity, _velocity;
@@ -64,6 +65,8 @@ public class Move : MonoBehaviour
     [SerializeField] private Transform aimPoint;
     private const int kMaxShootCount = 3;
     [SerializeField]private int shootCount;
+    [SerializeField] private AudioSource playerSound;
+    
     public List<MoveX> projectileList = new List<MoveX>();
 
     private void FireProjectile()
@@ -76,6 +79,11 @@ public class Move : MonoBehaviour
             var body = obj.GetComponent<MoveX>();
             projectileList.Add(body);
             body.AddVelocity(isLeft, transform.right);
+
+            PlaySound();
+
+            
+
             
             if(isLeft) body.projectileSprite.flipX = true;
         }
@@ -86,6 +94,13 @@ public class Move : MonoBehaviour
             projectileList.Remove(a);
             shootCount--;
         }
+    }
+
+    private void PlaySound()
+    {
+        playerSound.enabled = true;
+        playerSound.volume = m_ShootSound;
+        playerSound.Play();
     }
 
 }

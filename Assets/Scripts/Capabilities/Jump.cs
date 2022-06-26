@@ -8,11 +8,14 @@ public class Jump : MonoBehaviour
     [SerializeField, Range(0, 5)] private int _maxAirJumps = 0;
     [SerializeField, Range(0f, 10f)] private float _downwardMovementMultiplier = 3f;
     [SerializeField, Range(0f, 10f)] private float _upwardMovementMultiplier = 1.7f;
+    [SerializeField, Range(0f, 1f)] private float m_JumpSound;
+    [SerializeField] private AudioSource playerSound;
 
     private Controller _controller;
     private Rigidbody2D _body;
     private Ground _ground;
     private Vector2 _velocity;
+    
 
     private int _jumpPhase;
     private float _defaultGravityScale, _jumpSpeed;
@@ -26,6 +29,7 @@ public class Jump : MonoBehaviour
         _controller = GetComponent<Controller>();
 
         _defaultGravityScale = 1f;
+        m_JumpSound = 0.5f;
     }
 
     // Update is called once per frame
@@ -48,6 +52,7 @@ public class Jump : MonoBehaviour
         {
             _desiredJump = false;
             JumpAction();
+            PlaySound();
         }
 
         if (_body.velocity.y > 0)
@@ -83,6 +88,13 @@ public class Jump : MonoBehaviour
             }
             _velocity.y += _jumpSpeed;
         }
+    }
+
+    private void PlaySound()
+    {
+        playerSound.enabled = true;
+        playerSound.volume = m_JumpSound;
+        playerSound.Play();
     }
 }
 
