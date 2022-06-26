@@ -6,6 +6,7 @@ using System.Linq;
 [RequireComponent(typeof(Controller))]
 public class Move : MonoBehaviour
 {
+    public Animator player;
     [SerializeField, Range(0f, 100f)] private float _maxSpeed = 4f;
     [SerializeField, Range(0f, 100f)] private float _maxAcceleration = 35f;
     [SerializeField, Range(0f, 100f)] private float _maxAirAcceleration = 20f;
@@ -18,6 +19,8 @@ public class Move : MonoBehaviour
     private SpriteRenderer characterSprite;
     private float _maxSpeedChange, _acceleration;
     private bool _onGround;
+    private bool isMoving => _direction != Vector2.zero;
+    
 
     private bool isLeft = false;
     private void Awake()
@@ -44,7 +47,8 @@ public class Move : MonoBehaviour
             transform.localScale = Vector3.one * 1f;
             isLeft = false;
         }
-
+        
+        player.SetBool("Running", isMoving);
         if(_controller.input.RetrieveShootInput()) FireProjectile();
     }
 
@@ -75,6 +79,7 @@ public class Move : MonoBehaviour
         {
             ++shootCount;
             var obj = Instantiate(projectile, aimPoint.position, Quaternion.identity);
+            player.SetTrigger("Shooting");
 
             var body = obj.GetComponent<MoveX>();
             projectileList.Add(body);
