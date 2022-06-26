@@ -81,9 +81,6 @@ public class Move : MonoBehaviour
             body.AddVelocity(isLeft, transform.right);
 
             PlaySound();
-
-            
-
             
             if(isLeft) body.projectileSprite.flipX = true;
         }

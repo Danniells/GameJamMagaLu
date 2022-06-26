@@ -9,7 +9,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Awake()
     {
-        var height = 10.07f;
+        var height = 10.7f;
         
         for (int i = 0; i < levels.Count; i++)
         {

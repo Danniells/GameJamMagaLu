@@ -24,7 +24,8 @@ public class MoveX : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        body.constraints = RigidbodyConstraints2D.FreezePosition;
+        body.constraints = RigidbodyConstraints2D.FreezeAll;
+        
         if (other.transform.tag != "Sticky") 
         {
             FadeProjectile();
