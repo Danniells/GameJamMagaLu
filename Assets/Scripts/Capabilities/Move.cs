@@ -18,7 +18,7 @@ public class Move : MonoBehaviour
     private float _maxSpeedChange, _acceleration;
     private bool _onGround;
 
-
+    private bool isLeft = false;
     private void Awake()
     {
         _body = GetComponent<Rigidbody2D>();
@@ -33,10 +33,18 @@ public class Move : MonoBehaviour
         _direction.x = _controller.input.RetrieveMoveInput();
         _desiredVelocity = new Vector2(_direction.x, 0f) * Mathf.Max(_maxSpeed - _ground.Friction, 0f);
         
-        if(_controller.input.RetrieveShootInput()) FireProjectile();
+        if(_direction.x < 0)
+        { 
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+            isLeft = true;
+        }
+        else if(_direction.x > 0)
+        { 
+            transform.localScale = Vector3.one * 1f;
+            isLeft = false;
+        }
 
-        if(_direction.x < 0) transform.localScale = new Vector3(-1f, 1f, 1f);
-        else transform.localScale = Vector3.one * 1f;
+        if(_controller.input.RetrieveShootInput()) FireProjectile();
     }
 
     private void FixedUpdate()
@@ -60,10 +68,9 @@ public class Move : MonoBehaviour
 
     private void FireProjectile()
     {
-        var isLeft = _direction.x < 0;
-
         if(shootCount < kMaxShootCount)
         {
+            ++shootCount;
             var obj = Instantiate(projectile, aimPoint.position, Quaternion.identity);
 
             var body = obj.GetComponent<MoveX>();
@@ -71,12 +78,11 @@ public class Move : MonoBehaviour
             body.AddVelocity(isLeft, transform.right);
             
             if(isLeft) body.projectileSprite.flipX = true;
-            shootCount++;
         }
         else
         {
             var a = projectileList.First();
-            a.FadeProjectile();
+            a?.FadeProjectile();
             projectileList.Remove(a);
             shootCount--;
         }
