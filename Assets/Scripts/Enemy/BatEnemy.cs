@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class BatEnemy : MonoBehaviour
 {
-    Transform playerPosition;
+     /*
+     Transform playerPosition;
+
+    Rigidbody2D playerRB;
 
     [SerializeField] float speed = 2f;
     [SerializeField] float distance;
@@ -27,8 +30,25 @@ public class BatEnemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.name == "Player"){
-            isFollowingPlayer = true;
-            Debug.Log("Morreu pelo morcego");
+            //isFollowingPlayer = true;
+            Debug.Log("Empurrado");
         }
+    } 
+    */
+    Rigidbody2D enemyRB;
+    GameObject player;
+
+    [SerializeField] float speed = 3f;
+    [SerializeField] List<GameObject> ignoredCollision;
+
+    void Awake() {
+        enemyRB = GetComponent<Rigidbody2D>();
+        player = GameObject.Find("Player");
+    }
+
+    void Update(){
+        var followPlayer = (player.transform.position - transform.position).normalized;
+        enemyRB.velocity = new Vector2(0f,0f);
+        enemyRB.AddForce(followPlayer * speed);
     }
 }
