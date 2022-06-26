@@ -39,7 +39,6 @@ public class BatEnemy : MonoBehaviour
     GameObject player;
 
     [SerializeField] float speed = 3f;
-    [SerializeField] List<GameObject> ignoredCollision;
 
     void Awake() {
         enemyRB = GetComponent<Rigidbody2D>();
@@ -49,6 +48,9 @@ public class BatEnemy : MonoBehaviour
     void Update(){
         var followPlayer = (player.transform.position - transform.position).normalized;
         enemyRB.velocity = new Vector2(0f,0f);
-        enemyRB.AddForce(followPlayer * speed);
+        enemyRB.AddForce(followPlayer * speed, ForceMode2D.Impulse);
+
+        if(followPlayer.x > 0) transform.localScale = new Vector3(-1f, 1f, 1f);
+        else if(followPlayer.x < 0) transform.localScale = Vector3.one * 1f;
     }
 }
