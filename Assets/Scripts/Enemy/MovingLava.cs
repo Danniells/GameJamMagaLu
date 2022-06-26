@@ -17,9 +17,6 @@ public class MovingLava : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.name == "Player"){
             isDead = true;
-            Debug.Log("Morreu pela lava");
         }
     }
-    
- 
 }

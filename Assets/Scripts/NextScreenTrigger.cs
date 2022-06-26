@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class NextScreenTrigger : MonoBehaviour
 {
-
-
-    [SerializeField] GameObject player;
+    private GameObject player;
 
     private void Awake() {
         player = GameObject.FindGameObjectWithTag("Player");
