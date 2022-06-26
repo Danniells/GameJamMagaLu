@@ -13,7 +13,7 @@ public class Jump : MonoBehaviour
     private Rigidbody2D _body;
     private Ground _ground;
     private Vector2 _velocity;
-
+    Animator player;
     private int _jumpPhase;
     private float _defaultGravityScale, _jumpSpeed;
 
@@ -21,6 +21,7 @@ public class Jump : MonoBehaviour
 
     void Awake()
     {
+        player = GetComponent<Animator>();
         _body = GetComponent<Rigidbody2D>();
         _ground = GetComponent<Ground>();
         _controller = GetComponent<Controller>();
@@ -72,6 +73,8 @@ public class Jump : MonoBehaviour
             _jumpPhase += 1;
             
             _jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * _jumpHeight);
+
+            player.SetTrigger("Jumping");
             
             if (_velocity.y > 0f)
             {
