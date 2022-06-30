@@ -38,6 +38,6 @@ public class PlayerState
     }
 
     public virtual void Checks(){ //look for ground , look for walls, etc...
-
+        
     }
 }
