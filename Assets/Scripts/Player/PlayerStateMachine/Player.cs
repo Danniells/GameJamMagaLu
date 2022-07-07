@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform groundCheck;
 
     #endregion
+    
     #region Other Variables
     //----------PLAYER VELOCITY-----------//
     public Vector2 CurrentVelocity { get; private set; }
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour
         MoveState = new PlayerMoveState(this, StateMachine, playerData, "move");
         JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
         AirState = new PlayerAirState(this, StateMachine, playerData, "inAir");
-        LandState = new PlayerLandState(this, StateMachine, playerData, "inAir");
+        LandState = new PlayerLandState(this, StateMachine, playerData, "land");
         //do the same thing to AirState and LandState when we have the animations
     }
 
@@ -76,16 +77,17 @@ public class Player : MonoBehaviour
         PlayerRB.velocity = workSpace;
         CurrentVelocity = workSpace;
     }
+
     #endregion
 
     #region Check Functions
+    public bool CheckIfTouchingGround(){
+        return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround); //if detected ground, return true
+    }
     public void CheckIfShouldFlip(int xInput){
         if(xInput != 0 && xInput != FacingDirection){
             Flip();
         }
-    }
-    public bool CheckIfTouchingGround(){
-        return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround); //if detected ground, returns true
     }
     #endregion
 

@@ -13,6 +13,7 @@ public class PlayerAirState : PlayerState
     public override void Checks()
     {
         base.Checks();
+
         isGrounded = player.CheckIfTouchingGround();
     }
 
@@ -36,12 +37,15 @@ public class PlayerAirState : PlayerState
         base.Update();
 
         xInput = player.InputHandler.NormInputX;
+        
 
         if(isGrounded && player.CurrentVelocity.y < 0.01f){
             stateMachine.SwitchState(player.LandState);
-        }else{
+        }
+        else{
             player.CheckIfShouldFlip(xInput);
-            player.SetVelocityX(playerData.movementVelocity * xInput); //returns to move after jump
+            player.Anim.SetTrigger("inAir");
+            //player.SetVelocityX(playerData.movementVelocity * xInput); //returns to move after jump
         }
     }
 }
