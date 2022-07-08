@@ -6,6 +6,7 @@ public class PlayerGroundedState : PlayerState
 {
     protected int xInput;
     private bool JumpInput;
+    private bool isGrounded;
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
         
@@ -14,6 +15,7 @@ public class PlayerGroundedState : PlayerState
     public override void Checks()
     {
         base.Checks();
+        isGrounded = player.CheckIfTouchingGround();
     }
 
     public override void Enter()
@@ -41,6 +43,8 @@ public class PlayerGroundedState : PlayerState
         if(JumpInput){
             player.InputHandler.UseJumpInput();
             stateMachine.SwitchState(player.JumpState);
+        } else if(!isGrounded){
+            stateMachine.SwitchState(player.AirState); // the player dont get stuck in walls
         }
     }
 }

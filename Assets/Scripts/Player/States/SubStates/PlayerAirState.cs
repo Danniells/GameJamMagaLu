@@ -44,8 +44,9 @@ public class PlayerAirState : PlayerState
         }
         else{
             player.CheckIfShouldFlip(xInput);
+            //player.SetVelocityX(playerData.movementVelocity * xInput); //returns to move in air
+            
             player.Anim.SetTrigger("inAir");
-            //player.SetVelocityX(playerData.movementVelocity * xInput); //returns to move after jump
         }
     }
 }

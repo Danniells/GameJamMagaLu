@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public PlayerJumpState JumpState { get; private set; }
     public PlayerAirState AirState { get; private set; }
     public PlayerLandState LandState { get; private set; }
+    public PlayerAttackState AttackState { get; private set; }
     [SerializeField] private PlayerData playerData;
     #endregion
 
@@ -25,6 +26,8 @@ public class Player : MonoBehaviour
 
     #region Check Transforms
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private Transform aimPoint;
 
     #endregion
     
@@ -34,6 +37,13 @@ public class Player : MonoBehaviour
     public int FacingDirection { get; private set; }
 
     private Vector2 workSpace; //everytime to creaty a velocity
+
+    //---------PLAYER SHOOT-----------//
+
+    private const int kMaxShootCount = 3;
+    private int shootCount;
+    public List<MoveX> projectileList = new List<MoveX>();
+
     #endregion
 
     #region Unity Callback Functions
@@ -45,7 +55,8 @@ public class Player : MonoBehaviour
         JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
         AirState = new PlayerAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
-        //do the same thing to AirState and LandState when we have the animations
+        AttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
+        
     }
 
     void Start(){

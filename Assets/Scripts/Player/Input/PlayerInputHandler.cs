@@ -12,6 +12,14 @@ public class PlayerInputHandler : MonoBehaviour
 
     //---------JUMP--------//
     public bool JumpInput { get; private set; }
+    [SerializeField] private float inputHoldTime = 0.2f;
+    private float jumpInputStartTime;
+
+    //---------SHOOT--------//
+
+    void Update(){
+        CheckJumpInputHoldTime();
+    }
 
     public void OnMoveInput(InputAction.CallbackContext context){
         RawMovementInput = context.ReadValue<Vector2>();
@@ -23,12 +31,18 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnJumpInput(InputAction.CallbackContext context){
         if(context.started) { //means that jump button has pushed down
             JumpInput = true;
+            jumpInputStartTime = Time.time;
         }
     }
 
     public void UseJumpInput() => JumpInput = false;
-    
 
+    private void CheckJumpInputHoldTime(){
+        if(Time.time >= jumpInputStartTime + inputHoldTime){
+            JumpInput = false;
+        }
+    }
+    
     public void OnShootInput(InputAction.CallbackContext context){
         Debug.Log("shoot input");
     }
