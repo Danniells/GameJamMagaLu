@@ -10,13 +10,9 @@ public class MoveX : MonoBehaviour
     [SerializeField] private Rigidbody2D body;
 
 
-    public void AddVelocity(bool isLeft, Vector3 force) 
+    public void AddVelocity(Vector3 force) 
     {
-        if(isLeft)
-        {
-            body?.AddForce(-force * speed, ForceMode2D.Impulse);
-        }
-        else body?.AddForce(force * speed, ForceMode2D.Impulse);
+        body?.AddForce(force * speed, ForceMode2D.Impulse);
     }
 
     public void FadeProjectile() => projectileSprite?.DOFade(0.0f, 0.2f).SetEase(Ease.OutQuad).OnComplete(() => DestroyProjectile());

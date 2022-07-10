@@ -6,6 +6,7 @@ public class PlayerAirState : PlayerState
 {
     private int xInput;
     private bool isGrounded;
+    private bool ShootInput;
     public PlayerAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -37,16 +38,20 @@ public class PlayerAirState : PlayerState
         base.Update();
 
         xInput = player.InputHandler.NormInputX;
+        ShootInput = player.InputHandler.ShootInput;
         
 
         if(isGrounded && player.CurrentVelocity.y < 0.01f){
             stateMachine.SwitchState(player.LandState);
         }
-        else{
+        else if(!isGrounded || ShootInput){
             player.CheckIfShouldFlip(xInput);
+            stateMachine.SwitchState(player.AttackState);
             //player.SetVelocityX(playerData.movementVelocity * xInput); //returns to move in air
             
             player.Anim.SetTrigger("inAir");
         }
+
+        //if(ShootInput)
     }
 }

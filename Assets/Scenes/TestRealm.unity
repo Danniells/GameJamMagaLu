@@ -1877,7 +1877,6 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 36e559a70b15f4b2da08f855ccb616ad, type: 2}
   groundCheck: {fileID: 701705524}
   projectile: {fileID: 5354492403162583810, guid: e422b536771da42519dee66bd925d709, type: 3}
-  aimPoint: {fileID: 1271627974}
   projectileList: []
 --- !u!1 &2042001531
 GameObject:

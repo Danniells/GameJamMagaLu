@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttackState : PlayerAbilityState
 {
+    private bool ShootInput;
     public PlayerAttackState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -16,6 +17,7 @@ public class PlayerAttackState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
+        player.CheckIfShouldAttack();
     }
 
     public override void Exit()
@@ -31,5 +33,10 @@ public class PlayerAttackState : PlayerAbilityState
     public override void Update()
     {
         base.Update();
+        ShootInput = player.InputHandler.ShootInput;
+
+        if(!ShootInput)
+            stateMachine.SwitchState(player.IdleState);
+        
     }
 }

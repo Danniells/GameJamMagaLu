@@ -17,6 +17,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     //---------SHOOT--------//
 
+    public bool ShootInput { get; private set; }
+
     void Update(){
         CheckJumpInputHoldTime();
     }
@@ -32,10 +34,9 @@ public class PlayerInputHandler : MonoBehaviour
         if(context.started) { //means that jump button has pushed down
             JumpInput = true;
             jumpInputStartTime = Time.time;
-        }
+        } else if(context.canceled) 
+            JumpInput = false;
     }
-
-    public void UseJumpInput() => JumpInput = false;
 
     private void CheckJumpInputHoldTime(){
         if(Time.time >= jumpInputStartTime + inputHoldTime){
@@ -44,6 +45,10 @@ public class PlayerInputHandler : MonoBehaviour
     }
     
     public void OnShootInput(InputAction.CallbackContext context){
-        Debug.Log("shoot input");
+        if(context.started){
+            ShootInput = true;
+        }else if(context.canceled){
+            ShootInput = false;
+        }
     }
 }

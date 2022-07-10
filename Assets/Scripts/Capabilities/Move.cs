@@ -83,7 +83,7 @@ public class Move : MonoBehaviour
 
             var body = obj.GetComponent<MoveX>();
             projectileList.Add(body);
-            body.AddVelocity(isLeft, transform.right);
+            //body.AddVelocity(isLeft, transform.right);
 
             PlaySound();
             

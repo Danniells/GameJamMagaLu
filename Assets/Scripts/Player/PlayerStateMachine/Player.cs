@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Player : MonoBehaviour
 { 
@@ -27,7 +28,6 @@ public class Player : MonoBehaviour
     #region Check Transforms
     [SerializeField] private Transform groundCheck;
     [SerializeField] private GameObject projectile;
-    [SerializeField] private Transform aimPoint;
 
     #endregion
     
@@ -98,6 +98,25 @@ public class Player : MonoBehaviour
     public void CheckIfShouldFlip(int xInput){
         if(xInput != 0 && xInput != FacingDirection){
             Flip();
+        }
+    }
+
+    public void CheckIfShouldAttack(){
+        if(shootCount < kMaxShootCount)
+        {
+            ++shootCount;
+            var obj = Instantiate(projectile, transform.position, Quaternion.identity);
+
+            var body = obj.GetComponent<MoveX>();
+            projectileList.Add(body);
+            body.AddVelocity(transform.right);
+        }
+        else
+        {
+            var a = projectileList.First();
+            a?.FadeProjectile();
+            projectileList.Remove(a);
+            shootCount--;
         }
     }
     #endregion
